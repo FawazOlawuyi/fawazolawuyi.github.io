@@ -1,0 +1,2516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fawaz Ololade Olawuyi | AI/ML Engineer & Mechatronics Specialist</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #fafbfc;
+            --bg-secondary: #ffffff;
+            --bg-tertiary: #f5f7fa;
+            --accent-primary: #0066ff;
+            --accent-gradient-start: #0066ff;
+            --accent-gradient-end: #00d4ff;
+            --text-primary: #0a1628;
+            --text-secondary: #4a5568;
+            --text-tertiary: #718096;
+            --border-light: #e6ebf1;
+            --border-medium: #cbd5e0;
+            --success: #10b981;
+            --warning: #f59e0b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.65;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Sophisticated Background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(ellipse at top right, rgba(0, 102, 255, 0.04) 0%, transparent 60%),
+                radial-gradient(ellipse at bottom left, rgba(0, 212, 255, 0.03) 0%, transparent 60%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 0 2.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Header/Navigation */
+        header {
+            padding: 1.25rem 0;
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid var(--border-light);
+            z-index: 100;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            letter-spacing: -0.03em;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: linear-gradient(135deg, var(--accent-gradient-start), var(--accent-gradient-end));
+            border-radius: 2px;
+            transform: rotate(45deg);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9375rem;
+            font-weight: 500;
+            transition: color 0.2s ease;
+            letter-spacing: -0.01em;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 5rem 0 4rem;
+        }
+
+        .hero-header {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-text {
+            flex: 1;
+        }
+
+        /* Profile Picture */
+        .profile-picture-container {
+            position: relative;
+            width: 140px;
+            height: 140px;
+            flex-shrink: 0;
+        }
+
+        .profile-picture-wrapper {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            overflow: hidden;
+            position: relative;
+            background: linear-gradient(135deg, #f8f9fb 0%, #e9ecf1 100%);
+            border: 4px solid white;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12), 0 0 0 1px var(--border-light);
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .profile-picture-wrapper:hover {
+            box-shadow: 0 12px 40px rgba(0, 102, 255, 0.25), 0 0 0 1px var(--accent-primary);
+            transform: scale(1.05);
+        }
+
+        .profile-picture {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: none;
+        }
+
+        .profile-picture.active {
+            display: block;
+        }
+
+        .profile-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-tertiary);
+            background: linear-gradient(135deg, rgba(0, 102, 255, 0.04), rgba(0, 212, 255, 0.04));
+        }
+
+        .profile-placeholder.hidden {
+            display: none;
+        }
+
+        .profile-icon {
+            font-size: 3rem;
+            opacity: 0.4;
+            line-height: 1;
+        }
+
+        .profile-picture-badge {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--accent-gradient-start), var(--accent-gradient-end));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 102, 255, 0.35);
+            transition: all 0.2s ease;
+            border: 3px solid white;
+            color: white;
+            font-size: 1rem;
+        }
+
+        .profile-picture-badge:hover {
+            transform: scale(1.15);
+            box-shadow: 0 6px 16px rgba(0, 102, 255, 0.45);
+        }
+
+        #profile-input {
+            display: none;
+        }
+
+        .hero-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.625rem;
+            font-size: 0.8125rem;
+            color: var(--accent-primary);
+            background: linear-gradient(135deg, rgba(0, 102, 255, 0.06), rgba(0, 212, 255, 0.06));
+            padding: 0.5rem 1.125rem;
+            border-radius: 100px;
+            border: 1px solid rgba(0, 102, 255, 0.15);
+            margin-bottom: 1.75rem;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+        }
+
+        .hero-tag::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: var(--success);
+            border-radius: 50%;
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+            animation: pulse-success 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-success {
+            0%, 100% { box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2); }
+            50% { box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+        }
+
+        .hero h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 4.5rem;
+            font-weight: 800;
+            line-height: 1.08;
+            margin-bottom: 1.25rem;
+            color: var(--text-primary);
+            letter-spacing: -0.04em;
+        }
+
+        .hero .subtitle {
+            font-size: 1.625rem;
+            color: var(--text-secondary);
+            margin-bottom: 1.25rem;
+            max-width: 720px;
+            font-weight: 500;
+            letter-spacing: -0.02em;
+        }
+
+        .hero-description {
+            font-size: 1.125rem;
+            color: var(--text-tertiary);
+            max-width: 680px;
+            margin-bottom: 2.25rem;
+            line-height: 1.75;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 0.875rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.9375rem 1.875rem;
+            font-size: 0.9375rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 0.625rem;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            border: none;
+            font-family: 'Inter', sans-serif;
+            letter-spacing: -0.01em;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-gradient-start) 0%, var(--accent-gradient-end) 100%);
+            color: white;
+            box-shadow: 0 4px 14px rgba(0, 102, 255, 0.25);
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 6px 20px rgba(0, 102, 255, 0.35);
+            transform: translateY(-2px);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        .btn-secondary {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            border: 1.5px solid var(--border-medium);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent-primary);
+            box-shadow: 0 4px 12px rgba(0, 102, 255, 0.12);
+        }
+
+        /* Section Styling */
+        section {
+            padding: 5rem 0;
+        }
+
+        .section-header {
+            margin-bottom: 3rem;
+        }
+
+        .section-tag {
+            font-size: 0.8125rem;
+            color: var(--accent-primary);
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            margin-bottom: 0.75rem;
+            display: block;
+            font-weight: 700;
+        }
+
+        .section-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.75rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+            letter-spacing: -0.03em;
+        }
+
+        .section-description {
+            font-size: 1.125rem;
+            color: var(--text-tertiary);
+            max-width: 720px;
+            line-height: 1.7;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-light);
+            border-radius: 1.25rem;
+            padding: 2.25rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-gradient-start), var(--accent-gradient-end));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .card:hover {
+            border-color: var(--border-medium);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+            transform: translateY(-4px);
+        }
+
+        .card:hover::before {
+            opacity: 1;
+        }
+
+        .card-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Experience Grid */
+        .experience-grid {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .experience-item {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 2.25rem;
+            align-items: start;
+        }
+
+        .experience-date {
+            font-size: 0.8125rem;
+            color: var(--text-tertiary);
+            font-weight: 600;
+            background: var(--bg-tertiary);
+            padding: 0.5rem 0.875rem;
+            border-radius: 0.5rem;
+            display: inline-block;
+            border: 1px solid var(--border-light);
+        }
+
+        .experience-content h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 0.375rem;
+            color: var(--text-primary);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .experience-content .company {
+            font-size: 1.0625rem;
+            color: var(--text-secondary);
+            margin-bottom: 1.125rem;
+            font-weight: 500;
+        }
+
+        .experience-content ul {
+            list-style: none;
+            margin-top: 1.125rem;
+        }
+
+        .experience-content ul li {
+            color: var(--text-tertiary);
+            padding-left: 1.75rem;
+            position: relative;
+            margin-bottom: 0.875rem;
+            line-height: 1.7;
+        }
+
+        .experience-content ul li::before {
+            content: '';
+            position: absolute;
+            left: 0.5rem;
+            top: 0.625rem;
+            width: 5px;
+            height: 5px;
+            background: var(--accent-primary);
+            border-radius: 50%;
+        }
+
+        /* Projects Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            position: relative;
+        }
+
+        .project-number {
+            position: absolute;
+            top: 1.25rem;
+            right: 1.75rem;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: white;
+            background: linear-gradient(135deg, var(--accent-gradient-start), var(--accent-gradient-end));
+            padding: 0.375rem 0.75rem;
+            border-radius: 0.375rem;
+            z-index: 2;
+            box-shadow: 0 2px 8px rgba(0, 102, 255, 0.25);
+        }
+
+        .project-image-container {
+            width: 100%;
+            height: 260px;
+            background: linear-gradient(135deg, #f8f9fb 0%, #e9ecf1 100%);
+            border-radius: 1rem;
+            margin-bottom: 1.75rem;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            border: 2px solid var(--border-light);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .project-image-container:hover {
+            border-color: var(--accent-primary);
+            box-shadow: 0 8px 24px rgba(0, 102, 255, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: none;
+            transition: transform 0.3s ease;
+        }
+
+        .project-image.active {
+            display: block;
+        }
+
+        .project-image-container:hover .project-image {
+            transform: scale(1.02);
+        }
+
+        .upload-placeholder {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: var(--text-tertiary);
+            font-size: 0.9375rem;
+            gap: 1rem;
+        }
+
+        .upload-placeholder.hidden {
+            display: none;
+        }
+
+        .upload-icon {
+            font-size: 3rem;
+            opacity: 0.3;
+            filter: grayscale(1);
+        }
+
+        .image-gallery {
+            display: flex;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+            overflow-x: auto;
+            padding: 0.625rem 0;
+        }
+
+        .image-gallery::-webkit-scrollbar {
+            height: 6px;
+        }
+
+        .image-gallery::-webkit-scrollbar-track {
+            background: var(--bg-tertiary);
+            border-radius: 3px;
+        }
+
+        .image-gallery::-webkit-scrollbar-thumb {
+            background: var(--border-medium);
+            border-radius: 3px;
+        }
+
+        .image-gallery::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-primary);
+        }
+
+        .gallery-thumb {
+            width: 80px;
+            height: 80px;
+            border-radius: 0.625rem;
+            object-fit: cover;
+            cursor: pointer;
+            border: 2px solid var(--border-light);
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            flex-shrink: 0;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+
+        .gallery-thumb:hover {
+            border-color: var(--accent-primary);
+            transform: translateY(-4px);
+            box-shadow: 0 6px 16px rgba(0, 102, 255, 0.2);
+        }
+
+        .gallery-thumb.active {
+            border-color: var(--accent-primary);
+            box-shadow: 0 4px 12px rgba(0, 102, 255, 0.25);
+            transform: translateY(-2px);
+        }
+
+        .add-image-btn {
+            width: 80px;
+            height: 80px;
+            border-radius: 0.625rem;
+            background: var(--bg-tertiary);
+            border: 2px dashed var(--border-medium);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            flex-shrink: 0;
+            color: var(--text-tertiary);
+            font-size: 1.75rem;
+            font-weight: 300;
+        }
+
+        .add-image-btn:hover {
+            border-color: var(--accent-primary);
+            color: var(--accent-primary);
+            background: rgba(0, 102, 255, 0.04);
+            transform: translateY(-4px);
+            box-shadow: 0 4px 12px rgba(0, 102, 255, 0.1);
+        }
+
+        .file-input {
+            display: none;
+        }
+
+        .project-card h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 0.875rem;
+            color: var(--text-primary);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .project-card p {
+            color: var(--text-tertiary);
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.625rem;
+        }
+
+        .tag {
+            font-size: 0.75rem;
+            padding: 0.4375rem 0.875rem;
+            background: var(--bg-tertiary);
+            color: var(--text-secondary);
+            border-radius: 0.5rem;
+            border: 1px solid var(--border-light);
+            font-weight: 600;
+            letter-spacing: 0.01em;
+        }
+
+        /* Image Modal */
+        .image-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 22, 40, 0.96);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .image-modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            max-width: 92%;
+            max-height: 92%;
+            object-fit: contain;
+            border-radius: 1rem;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            font-size: 1.5rem;
+            color: white;
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.12);
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+        }
+
+        .modal-close:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.08);
+        }
+
+        /* Skills Grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-category h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.1875rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .skill-category h3::before {
+            content: '';
+            width: 4px;
+            height: 24px;
+            background: linear-gradient(180deg, var(--accent-gradient-start), var(--accent-gradient-end));
+            border-radius: 2px;
+        }
+
+        .skill-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .skill-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-secondary);
+            font-size: 0.9375rem;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .skill-item:last-child {
+            border-bottom: none;
+        }
+
+        .skill-level {
+            font-size: 0.75rem;
+            color: var(--accent-primary);
+            background: var(--bg-tertiary);
+            padding: 0.3125rem 0.75rem;
+            border-radius: 0.375rem;
+            font-weight: 600;
+            border: 1px solid var(--border-light);
+        }
+
+        /* Education */
+        .education-item {
+            margin-bottom: 2.75rem;
+        }
+
+        .education-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .education-item h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 0.625rem;
+            color: var(--text-primary);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .education-item .degree {
+            font-size: 1.0625rem;
+            color: var(--accent-primary);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .education-item .date {
+            font-size: 0.9375rem;
+            color: var(--text-tertiary);
+        }
+
+        /* Awards */
+        .awards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .award-item {
+            background: var(--bg-secondary);
+            border-left: 4px solid transparent;
+            border-image: linear-gradient(180deg, var(--accent-gradient-start), var(--accent-gradient-end)) 1;
+            padding: 1.75rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+            border: 1px solid var(--border-light);
+            border-left: 4px solid var(--accent-primary);
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .award-item:hover {
+            box-shadow: 0 6px 20px rgba(0, 102, 255, 0.1);
+            transform: translateX(6px);
+        }
+
+        .award-item h4 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.125rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+            font-weight: 700;
+            letter-spacing: -0.01em;
+        }
+
+        .award-item .year {
+            font-size: 0.8125rem;
+            color: var(--text-tertiary);
+            font-weight: 500;
+        }
+
+        /* Contact Section */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            padding: 2rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-light);
+            border-radius: 1rem;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+        }
+
+        .contact-item:hover {
+            border-color: var(--accent-primary);
+            box-shadow: 0 8px 24px rgba(0, 102, 255, 0.12);
+            transform: translateY(-4px);
+        }
+
+        .contact-icon {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, rgba(0, 102, 255, 0.08), rgba(0, 212, 255, 0.08));
+            border-radius: 0.875rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            flex-shrink: 0;
+            border: 1px solid rgba(0, 102, 255, 0.1);
+        }
+
+        .contact-info h4 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.9375rem;
+            margin-bottom: 0.25rem;
+            color: var(--text-primary);
+            font-weight: 700;
+        }
+
+        .contact-info a,
+        .contact-info p {
+            color: var(--text-tertiary);
+            text-decoration: none;
+            font-size: 0.9375rem;
+        }
+
+        .contact-info a:hover {
+            color: var(--accent-primary);
+        }
+
+        /* Footer */
+        footer {
+            padding: 3.5rem 0;
+            text-align: center;
+            border-top: 1px solid var(--border-light);
+            margin-top: 5rem;
+            background: var(--bg-secondary);
+        }
+
+        footer p {
+            color: var(--text-tertiary);
+            font-size: 0.9375rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1.5rem;
+            }
+
+            .hero-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1.5rem;
+            }
+
+            .profile-picture-container {
+                width: 100px;
+                height: 100px;
+            }
+
+            .profile-picture-badge {
+                width: 30px;
+                height: 30px;
+                font-size: 0.875rem;
+                border: 2px solid white;
+            }
+
+            .hero h1 {
+                font-size: 2.75rem;
+            }
+
+            .hero .subtitle {
+                font-size: 1.375rem;
+            }
+
+            .section-title {
+                font-size: 2.25rem;
+            }
+
+            .experience-item {
+                grid-template-columns: 1fr;
+                gap: 1.25rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .project-image-container {
+                height: 220px;
+            }
+
+            .gallery-thumb,
+            .add-image-btn {
+                width: 70px;
+                height: 70px;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(24px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        .stagger-1 { animation-delay: 0.05s; }
+        .stagger-2 { animation-delay: 0.1s; }
+        .stagger-3 { animation-delay: 0.15s; }
+        .stagger-4 { animation-delay: 0.2s; }
+    </style>
+    <style>
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8fafc;
+            --bg-card: #ffffff;
+            --accent-primary: #2563eb;
+            --accent-secondary: #0ea5e9;
+            --accent-tertiary: #6366f1;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --border-hover: #cbd5e1;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Subtle Background Pattern */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(37, 99, 235, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(99, 102, 241, 0.03) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Header/Navigation */
+        header {
+            padding: 1.5rem 0;
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 100;
+            animation: slideDown 0.6s ease-out;
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            letter-spacing: -0.02em;
+        }
+
+        .logo span {
+            color: var(--accent-primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.2s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 6rem 0 5rem;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.8rem;
+            color: var(--accent-primary);
+            background: rgba(37, 99, 235, 0.08);
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            border: 1px solid rgba(37, 99, 235, 0.2);
+            margin-bottom: 2rem;
+            font-weight: 500;
+        }
+
+        .hero-tag::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--accent-primary);
+            border-radius: 50%;
+            animation: pulse-dot 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+            letter-spacing: -0.03em;
+        }
+
+        .hero .subtitle {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            max-width: 700px;
+            font-weight: 500;
+        }
+
+        .hero-description {
+            font-size: 1.125rem;
+            color: var(--text-muted);
+            max-width: 650px;
+            margin-bottom: 2.5rem;
+            line-height: 1.7;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.875rem 1.75rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            border: none;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .btn-primary {
+            background: var(--accent-primary);
+            color: white;
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-primary:hover {
+            background: #1d4ed8;
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--text-primary);
+            border: 1.5px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent-primary);
+            color: var(--accent-primary);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Section Styling */
+        section {
+            padding: 5rem 0;
+            animation: fadeInUp 0.8s ease-out both;
+        }
+
+        .section-header {
+            margin-bottom: 3.5rem;
+        }
+
+        .section-tag {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.8rem;
+            color: var(--accent-primary);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.75rem;
+            display: block;
+            font-weight: 600;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+            letter-spacing: -0.02em;
+        }
+
+        .section-description {
+            font-size: 1.125rem;
+            color: var(--text-muted);
+            max-width: 700px;
+            line-height: 1.7;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 1rem;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .card:hover {
+            border-color: var(--border-hover);
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-2px);
+        }
+
+        .card-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Experience Grid */
+        .experience-grid {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .experience-item {
+            display: grid;
+            grid-template-columns: 180px 1fr;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        .experience-date {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.875rem;
+            color: var(--accent-primary);
+            font-weight: 600;
+            background: rgba(37, 99, 235, 0.05);
+            padding: 0.5rem 0.75rem;
+            border-radius: 0.375rem;
+            display: inline-block;
+        }
+
+        .experience-content h3 {
+            font-size: 1.375rem;
+            margin-bottom: 0.375rem;
+            color: var(--text-primary);
+            font-weight: 700;
+            letter-spacing: -0.01em;
+        }
+
+        .experience-content .company {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .experience-content ul {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        .experience-content ul li {
+            color: var(--text-muted);
+            padding-left: 1.5rem;
+            position: relative;
+            margin-bottom: 0.75rem;
+            line-height: 1.6;
+        }
+
+        .experience-content ul li::before {
+            content: '•';
+            position: absolute;
+            left: 0.5rem;
+            color: var(--accent-primary);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        /* Projects Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            position: relative;
+        }
+
+        .project-number {
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--accent-primary);
+            background: rgba(37, 99, 235, 0.08);
+            padding: 0.25rem 0.625rem;
+            border-radius: 0.25rem;
+            z-index: 2;
+        }
+
+        .project-image-container {
+            width: 100%;
+            height: 220px;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border-radius: 0.75rem;
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            border: 2px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .project-image-container:hover {
+            border-color: var(--accent-primary);
+            box-shadow: var(--shadow-md);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: none;
+        }
+
+        .project-image.active {
+            display: block;
+        }
+
+        .upload-placeholder {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: var(--text-muted);
+            font-size: 0.875rem;
+            gap: 0.75rem;
+        }
+
+        .upload-placeholder.hidden {
+            display: none;
+        }
+
+        .upload-icon {
+            font-size: 2.5rem;
+            opacity: 0.4;
+        }
+
+        .image-gallery {
+            display: flex;
+            gap: 0.625rem;
+            margin-bottom: 1.25rem;
+            overflow-x: auto;
+            padding: 0.5rem 0;
+        }
+
+        .image-gallery::-webkit-scrollbar {
+            height: 6px;
+        }
+
+        .image-gallery::-webkit-scrollbar-track {
+            background: var(--bg-secondary);
+            border-radius: 3px;
+        }
+
+        .image-gallery::-webkit-scrollbar-thumb {
+            background: var(--border-hover);
+            border-radius: 3px;
+        }
+
+        .image-gallery::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-primary);
+        }
+
+        .gallery-thumb {
+            width: 70px;
+            height: 70px;
+            border-radius: 0.5rem;
+            object-fit: cover;
+            cursor: pointer;
+            border: 2px solid var(--border-color);
+            transition: all 0.2s ease;
+            flex-shrink: 0;
+        }
+
+        .gallery-thumb:hover {
+            border-color: var(--accent-primary);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .gallery-thumb.active {
+            border-color: var(--accent-primary);
+            box-shadow: var(--shadow-md);
+        }
+
+        .add-image-btn {
+            width: 70px;
+            height: 70px;
+            border-radius: 0.5rem;
+            background: var(--bg-secondary);
+            border: 2px dashed var(--border-hover);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            flex-shrink: 0;
+            color: var(--text-muted);
+            font-size: 1.5rem;
+        }
+
+        .add-image-btn:hover {
+            border-color: var(--accent-primary);
+            color: var(--accent-primary);
+            background: rgba(37, 99, 235, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .file-input {
+            display: none;
+        }
+
+        .project-card h3 {
+            font-size: 1.375rem;
+            margin-bottom: 0.875rem;
+            color: var(--text-primary);
+            font-weight: 700;
+            letter-spacing: -0.01em;
+        }
+
+        .project-card p {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tag {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.75rem;
+            padding: 0.375rem 0.75rem;
+            background: rgba(37, 99, 235, 0.08);
+            color: var(--accent-primary);
+            border-radius: 0.375rem;
+            border: 1px solid rgba(37, 99, 235, 0.15);
+            font-weight: 500;
+        }
+
+        /* Image Modal */
+        .image-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .image-modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            border-radius: 0.75rem;
+            box-shadow: var(--shadow-xl);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            font-size: 1.5rem;
+            color: white;
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.1);
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .modal-close:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
+        }
+
+        /* Skills Grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-category h3 {
+            font-size: 1.125rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.625rem;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+        }
+
+        .skill-category h3::before {
+            content: '';
+            width: 4px;
+            height: 20px;
+            background: var(--accent-primary);
+            border-radius: 2px;
+        }
+
+        .skill-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.875rem;
+        }
+
+        .skill-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            padding: 0.625rem 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .skill-item:last-child {
+            border-bottom: none;
+        }
+
+        .skill-level {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.75rem;
+            color: var(--accent-primary);
+            background: rgba(37, 99, 235, 0.08);
+            padding: 0.25rem 0.625rem;
+            border-radius: 0.25rem;
+            font-weight: 500;
+        }
+
+        /* Education */
+        .education-item {
+            margin-bottom: 2.5rem;
+        }
+
+        .education-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .education-item h3 {
+            font-size: 1.375rem;
+            margin-bottom: 0.625rem;
+            color: var(--text-primary);
+            font-weight: 700;
+            letter-spacing: -0.01em;
+        }
+
+        .education-item .degree {
+            font-size: 1rem;
+            color: var(--accent-primary);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .education-item .date {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        /* Awards */
+        .awards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .award-item {
+            background: var(--bg-card);
+            border-left: 4px solid var(--accent-primary);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-color);
+            border-left: 4px solid var(--accent-primary);
+            transition: all 0.2s ease;
+        }
+
+        .award-item:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateX(4px);
+        }
+
+        .award-item h4 {
+            font-size: 1.0625rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+            font-weight: 700;
+            letter-spacing: -0.01em;
+        }
+
+        .award-item .year {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.8125rem;
+            color: var(--text-muted);
+        }
+
+        /* Contact Section */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+            padding: 1.75rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 0.75rem;
+            transition: all 0.2s ease;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .contact-item:hover {
+            border-color: var(--accent-primary);
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+        }
+
+        .contact-icon {
+            width: 52px;
+            height: 52px;
+            background: rgba(37, 99, 235, 0.08);
+            border-radius: 0.625rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .contact-info h4 {
+            font-size: 0.9375rem;
+            margin-bottom: 0.25rem;
+            color: var(--text-primary);
+            font-weight: 700;
+        }
+
+        .contact-info a,
+        .contact-info p {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9375rem;
+        }
+
+        .contact-info a:hover {
+            color: var(--accent-primary);
+        }
+
+        /* Footer */
+        footer {
+            padding: 3rem 0;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+            margin-top: 4rem;
+            background: var(--bg-card);
+        }
+
+        footer p {
+            color: var(--text-muted);
+            font-size: 0.9375rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero .subtitle {
+                font-size: 1.25rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .experience-item {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .project-image-container {
+                height: 200px;
+            }
+
+            .gallery-thumb,
+            .add-image-btn {
+                width: 60px;
+                height: 60px;
+            }
+        }
+
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        .stagger-1 { animation-delay: 0.1s; }
+        .stagger-2 { animation-delay: 0.2s; }
+        .stagger-3 { animation-delay: 0.3s; }
+        .stagger-4 { animation-delay: 0.4s; }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">Fawaz <span>Olawuyi</span></div>
+                <ul class="nav-links">
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#experience">Experience</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-header">
+                <div class="profile-picture-container">
+                    <div class="profile-picture-wrapper" onclick="document.getElementById('profile-input').click()">
+                        <div class="profile-placeholder">
+                            <div class="profile-icon">👤</div>
+                        </div>
+                        <img class="profile-picture" id="profile-picture" alt="Fawaz Ololade Olawuyi">
+                    </div>
+                    <div class="profile-picture-badge" onclick="document.getElementById('profile-input').click()">
+                        📷
+                    </div>
+                    <input type="file" id="profile-input" accept="image/*" onchange="handleProfileUpload(event)">
+                </div>
+                
+                <div class="hero-text">
+                    <span class="hero-tag">Available for Opportunities</span>
+                    <h1>Fawaz Ololade<br>Olawuyi</h1>
+                </div>
+            </div>
+            
+            <p class="subtitle">AI/ML Developer & Mechatronics Engineer</p>
+            <p class="hero-description">
+                First-class honors graduate specializing in artificial intelligence, machine learning, and robotics systems. 
+                Passionate about developing intelligent solutions that bridge the gap between advanced algorithms and real-world applications.
+            </p>
+            <div class="cta-buttons">
+                <a href="#contact" class="btn btn-primary">Get In Touch</a>
+                <a href="#projects" class="btn btn-secondary">View My Work</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Career Journey</span>
+                <h2 class="section-title">Work Experience</h2>
+            </div>
+
+            <div class="experience-grid">
+                <div class="card fade-in stagger-1">
+                    <div class="card-content">
+                        <div class="experience-item">
+                            <div class="experience-date">2024 – 2025</div>
+                            <div class="experience-content">
+                                <h3>AI/ML Developer</h3>
+                                <p class="company">Robotics and Artificial Intelligence Nigeria, Lagos</p>
+                                <ul>
+                                    <li>Developed and deployed AI-powered solutions including an AI meeting agent, RespondIQ (SME negotiation and scheduling assistant), and sentiment analysis tools</li>
+                                    <li>Led the development of an AI-powered 2D blueprint to 3D building conversion system (ongoing project)</li>
+                                    <li>Implemented machine learning models to optimize automation processes and improve predictive analytics for industrial and business applications</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card fade-in stagger-2">
+                    <div class="card-content">
+                        <div class="experience-item">
+                            <div class="experience-date">July 2024 – Present</div>
+                            <div class="experience-content">
+                                <h3>Project Manager</h3>
+                                <p class="company">Dapo-Ola Construction Limited, Lagos</p>
+                                <ul>
+                                    <li>Managed construction operations and compliance for residential projects</li>
+                                    <li>Optimized workforce scheduling to improve efficiency</li>
+                                    <li>Coordinated procurement and ensured uninterrupted workflow for essential materials</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card fade-in stagger-3">
+                    <div class="card-content">
+                        <div class="experience-item">
+                            <div class="experience-date">Mar 2023 – Sept 2023</div>
+                            <div class="experience-content">
+                                <h3>Engineering Intern</h3>
+                                <p class="company">Nigeria Railway Corporation, Lagos</p>
+                                <ul>
+                                    <li>Diagnosed and resolved mechanical and electrical issues in train coaches, brake systems, and engines</li>
+                                    <li>Participated in repainting and refurbishment to enhance aesthetics and corrosion protection</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card fade-in stagger-4">
+                    <div class="card-content">
+                        <div class="experience-item">
+                            <div class="experience-date">May – Oct 2023</div>
+                            <div class="experience-content">
+                                <h3>Engineering Intern</h3>
+                                <p class="company">Flour Mills of Nigeria BAGCO (Morpack), Lagos</p>
+                                <ul>
+                                    <li>Maintained and calibrated industrial machines including printing, slitting, laminating, and evaporating systems</li>
+                                    <li>Assisted in installation and setup of W&H printing machine, ensuring precise calibration</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Featured Work</span>
+                <h2 class="section-title">Notable Projects</h2>
+                <p class="section-description">
+                    A showcase of innovative AI/ML solutions and engineering projects that demonstrate my technical expertise and problem-solving capabilities.
+                </p>
+            </div>
+
+            <div class="projects-grid">
+                <div class="card project-card fade-in stagger-1" data-project="1">
+                    <div class="project-number">01</div>
+                    <div class="card-content">
+                        <div class="project-image-container" onclick="openImageUpload(1)">
+                            <div class="upload-placeholder">
+                                <div class="upload-icon">📸</div>
+                                <span>Click to add project images</span>
+                            </div>
+                            <img class="project-image" id="main-image-1" alt="RespondIQ">
+                        </div>
+                        <div class="image-gallery" id="gallery-1"></div>
+                        <input type="file" class="file-input" id="file-input-1" accept="image/*" multiple onchange="handleImageUpload(event, 1)">
+                        
+                        <h3>RespondIQ</h3>
+                        <p>AI agent for SMEs handling negotiation, ticketing, scheduling, and workflow automation. Winner of RAIN x META Hackathon Agentic AI 1st Position.</p>
+                        <div class="project-tags">
+                            <span class="tag">AI Agent</span>
+                            <span class="tag">NLP</span>
+                            <span class="tag">Automation</span>
+                            <span class="tag">Python</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card project-card fade-in stagger-2" data-project="2">
+                    <div class="project-number">02</div>
+                    <div class="card-content">
+                        <div class="project-image-container" onclick="openImageUpload(2)">
+                            <div class="upload-placeholder">
+                                <div class="upload-icon">📸</div>
+                                <span>Click to add project images</span>
+                            </div>
+                            <img class="project-image" id="main-image-2" alt="2D Blueprint to 3D Building">
+                        </div>
+                        <div class="image-gallery" id="gallery-2"></div>
+                        <input type="file" class="file-input" id="file-input-2" accept="image/*" multiple onchange="handleImageUpload(event, 2)">
+                        
+                        <h3>2D Blueprint to 3D Building Conversion</h3>
+                        <p>Machine learning-driven system to automate architectural design conversion, streamlining the design-to-model workflow for construction projects.</p>
+                        <div class="project-tags">
+                            <span class="tag">Computer Vision</span>
+                            <span class="tag">Deep Learning</span>
+                            <span class="tag">3D Modeling</span>
+                            <span class="tag">TensorFlow</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card project-card fade-in stagger-3" data-project="3">
+                    <div class="project-number">03</div>
+                    <div class="card-content">
+                        <div class="project-image-container" onclick="openImageUpload(3)">
+                            <div class="upload-placeholder">
+                                <div class="upload-icon">📸</div>
+                                <span>Click to add project images</span>
+                            </div>
+                            <img class="project-image" id="main-image-3" alt="AI Meeting Agent">
+                        </div>
+                        <div class="image-gallery" id="gallery-3"></div>
+                        <input type="file" class="file-input" id="file-input-3" accept="image/*" multiple onchange="handleImageUpload(event, 3)">
+                        
+                        <h3>AI Meeting Agent</h3>
+                        <p>Intelligent assistant to manage schedules, notifications, and meeting summaries. Enhances productivity through automated scheduling and intelligent reminders.</p>
+                        <div class="project-tags">
+                            <span class="tag">NLP</span>
+                            <span class="tag">AI Assistant</span>
+                            <span class="tag">Scheduling</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card project-card fade-in stagger-4" data-project="4">
+                    <div class="project-number">04</div>
+                    <div class="card-content">
+                        <div class="project-image-container" onclick="openImageUpload(4)">
+                            <div class="upload-placeholder">
+                                <div class="upload-icon">📸</div>
+                                <span>Click to add project images</span>
+                            </div>
+                            <img class="project-image" id="main-image-4" alt="Automated Sorting Machine">
+                        </div>
+                        <div class="image-gallery" id="gallery-4"></div>
+                        <input type="file" class="file-input" id="file-input-4" accept="image/*" multiple onchange="handleImageUpload(event, 4)">
+                        
+                        <h3>Automated Sorting & Wrapping Machine</h3>
+                        <p>Final year project awarded Best Group Project at ABUAD. Designed and built a mechatronics system for automated product sorting and packaging.</p>
+                        <div class="project-tags">
+                            <span class="tag">Robotics</span>
+                            <span class="tag">Automation</span>
+                            <span class="tag">IoT</span>
+                            <span class="tag">C++</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card project-card fade-in stagger-1" data-project="5">
+                    <div class="project-number">05</div>
+                    <div class="card-content">
+                        <div class="project-image-container" onclick="openImageUpload(5)">
+                            <div class="upload-placeholder">
+                                <div class="upload-icon">📸</div>
+                                <span>Click to add project images</span>
+                            </div>
+                            <img class="project-image" id="main-image-5" alt="Sentiment Analysis">
+                        </div>
+                        <div class="image-gallery" id="gallery-5"></div>
+                        <input type="file" class="file-input" id="file-input-5" accept="image/*" multiple onchange="handleImageUpload(event, 5)">
+                        
+                        <h3>Sentiment Analysis System</h3>
+                        <p>Implemented NLP models for textual data classification and predictive analytics, enabling data-driven decision making for business applications.</p>
+                        <div class="project-tags">
+                            <span class="tag">NLP</span>
+                            <span class="tag">Machine Learning</span>
+                            <span class="tag">Data Analysis</span>
+                            <span class="tag">Python</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Technical Expertise</span>
+                <h2 class="section-title">Skills & Technologies</h2>
+            </div>
+
+            <div class="skills-grid">
+                <div class="card fade-in stagger-1">
+                    <div class="card-content">
+                        <div class="skill-category">
+                            <h3>Programming & Development</h3>
+                            <div class="skill-list">
+                                <div class="skill-item">
+                                    <span>Python</span>
+                                    <span class="skill-level">Advanced</span>
+                                </div>
+                                <div class="skill-item">
+                                    <span>C++</span>
+                                    <span class="skill-level">Intermediate</span>
+                                </div>
+                                <div class="skill-item">
+                                    <span>MATLAB</span>
+                                    <span class="skill-level">Intermediate</span>
+                                </div>
+                                <div class="skill-item">
+                                    <span>C</span>
+                                    <span class="skill-level">Intermediate</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card fade-in stagger-2">
+                    <div class="card-content">
+                        <div class="skill-category">
+                            <h3>AI/ML & Data Science</h3>
+                            <div class="skill-list">
+                                <div class="skill-item">
+                                    <span>TensorFlow & Keras</span>
+                                    <span class="skill-level">Advanced</span>
+                                </div>
+                                <div class="skill-item">
+                                    <span>scikit-learn</span>
+                                    <span class="skill-level">Advanced</span>
+                                </div>
+                                <div class="skill-item">
+                                    <span>NLP</span>
+                                    <span class="skill-level">Advanced</span>
+                                </div>
+                                <div class="skill-item">
+                                    <span>Computer Vision</span>
+                                    <span class="skill-level">Intermediate</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card fade-in stagger-3">
+                    <div class="card-content">
+                        <div class="skill-category">
+                            <h3>Design & CAD Tools</h3>
+                            <div class="skill-list">
+                                <div class="skill-item">
+                                    <span>AutoCAD</span>
+                                    <span class="skill-level">Intermediate</span>
+                                </div>
+                                <div class="skill-item">
+                                    <span>SolidWorks</span>
+                                    <span class="skill-level">Intermediate</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card fade-in stagger-4">
+                    <div class="card-content">
+                        <div class="skill-category">
+                            <h3>Engineering & Systems</h3>
+                            <div class="skill-list">
+                                <div class="skill-item">
+                                    <span>Robotics Systems</span>
+                                    <span class="skill-level">Advanced</span>
+                                </div>
+                                <div class="skill-item">
+                                    <span>Automation</span>
+                                    <span class="skill-level">Advanced</span>
+                                </div>
+                                <div class="skill-item">
+                                    <span>IoT Integration</span>
+                                    <span class="skill-level">Intermediate</span>
+                                </div>
+                                <div class="skill-item">
+                                    <span>Data Analysis</span>
+                                    <span class="skill-level">Advanced</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Academic Background</span>
+                <h2 class="section-title">Education</h2>
+            </div>
+
+            <div class="card fade-in">
+                <div class="card-content">
+                    <div class="education-item">
+                        <h3>Afe Babalola University, Ado-Ekiti</h3>
+                        <p class="degree">Bachelor of Engineering (B.Eng.), Mechatronics Engineering – First Class Honors (4.58/5.0)</p>
+                        <p class="date">September 2019 – October 2024</p>
+                    </div>
+
+                    <div class="education-item">
+                        <h3>Robotics and Artificial Intelligence Nigeria</h3>
+                        <p class="degree">AI and Machine Learning Developer Program</p>
+                        <p class="date">2024 – 2025</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Awards Section -->
+    <section id="awards">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Recognition</span>
+                <h2 class="section-title">Achievements & Leadership</h2>
+            </div>
+
+            <div class="awards-grid">
+                <div class="award-item fade-in stagger-1">
+                    <h4>Founder's Award for Academic Excellence</h4>
+                    <p class="year">ABUAD | 2019 – 2024</p>
+                </div>
+
+                <div class="award-item fade-in stagger-2">
+                    <h4>RAIN x META Hackathon Winner</h4>
+                    <p class="year">1st Position - Agentic AI | 2024</p>
+                </div>
+
+                <div class="award-item fade-in stagger-3">
+                    <h4>Best College Project (Group Category)</h4>
+                    <p class="year">ABUAD | 2024</p>
+                </div>
+
+                <div class="award-item fade-in stagger-4">
+                    <h4>NUESA Presidential Honorary Award</h4>
+                    <p class="year">Selfless Service | 2023</p>
+                </div>
+
+                <div class="award-item fade-in stagger-1">
+                    <h4>Financial Secretary</h4>
+                    <p class="year">ABUAD Salt Valley Associates | 2022 – 2024</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Let's Connect</span>
+                <h2 class="section-title">Get In Touch</h2>
+                <p class="section-description">
+                    I'm always interested in new opportunities, collaborations, and innovative projects. Feel free to reach out!
+                </p>
+            </div>
+
+            <div class="contact-grid">
+                <div class="contact-item fade-in stagger-1">
+                    <div class="contact-icon">📧</div>
+                    <div class="contact-info">
+                        <h4>Email</h4>
+                        <a href="/cdn-cgi/l/email-protection#b5d3d4c2d4cfdad9d4c2c0ccdc858181f5d2d8d4dcd99bd6dad8"><span class="__cf_email__" data-cfemail="f294938593889d9e9385878b9bc2c6c6b2959f939b9edc919d9f">[email&#160;protected]</span></a>
+                    </div>
+                </div>
+
+                <div class="contact-item fade-in stagger-2">
+                    <div class="contact-icon">📱</div>
+                    <div class="contact-info">
+                        <h4>Phone</h4>
+                        <a href="tel:+2348122786064">+234 812 278 6064</a>
+                    </div>
+                </div>
+
+                <div class="contact-item fade-in stagger-3">
+                    <div class="contact-icon">📍</div>
+                    <div class="contact-info">
+                        <h4>Location</h4>
+                        <p>Yaba, Lagos, Nigeria</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Image Modal -->
+    <div class="image-modal" id="imageModal">
+        <div class="modal-close" onclick="closeModal()">×</div>
+        <img class="modal-content" id="modalImage">
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>Designed & Built by Fawaz Ololade Olawuyi © 2024</p>
+        </div>
+    </footer>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        // Profile picture functionality
+        function handleProfileUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const profilePic = document.getElementById('profile-picture');
+                const placeholder = profilePic.previousElementSibling;
+                
+                profilePic.src = e.target.result;
+                profilePic.classList.add('active');
+                placeholder.classList.add('hidden');
+                
+                // Save to localStorage
+                localStorage.setItem('profile-picture', e.target.result);
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // Load profile picture on page load
+        window.addEventListener('DOMContentLoaded', function() {
+            const savedProfile = localStorage.getItem('profile-picture');
+            if (savedProfile) {
+                const profilePic = document.getElementById('profile-picture');
+                const placeholder = profilePic.previousElementSibling;
+                profilePic.src = savedProfile;
+                profilePic.classList.add('active');
+                placeholder.classList.add('hidden');
+            }
+
+            // Load project images
+            for (let i = 1; i <= 5; i++) {
+                const saved = localStorage.getItem(`project-${i}-images`);
+                if (saved) {
+                    projectImages[i] = JSON.parse(saved);
+                    updateGallery(i);
+                    if (projectImages[i].length > 0) {
+                        displayMainImage(i, 0);
+                    }
+                }
+            }
+        });
+
+        // Project images storage
+        const projectImages = {
+            1: [],
+            2: [],
+            3: [],
+            4: [],
+            5: []
+        };
+
+        // Open file input
+        function openImageUpload(projectId) {
+            document.getElementById(`file-input-${projectId}`).click();
+        }
+
+        // Handle image upload
+        function handleImageUpload(event, projectId) {
+            const files = event.target.files;
+            if (files.length === 0) return;
+
+            for (let file of files) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    projectImages[projectId].push(e.target.result);
+                    saveImages(projectId);
+                    updateGallery(projectId);
+                    
+                    // Display first image as main if no image is shown
+                    const mainImg = document.getElementById(`main-image-${projectId}`);
+                    if (!mainImg.classList.contains('active')) {
+                        displayMainImage(projectId, projectImages[projectId].length - 1);
+                    }
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // Save images to localStorage
+        function saveImages(projectId) {
+            localStorage.setItem(`project-${projectId}-images`, JSON.stringify(projectImages[projectId]));
+        }
+
+        // Update gallery display
+        function updateGallery(projectId) {
+            const gallery = document.getElementById(`gallery-${projectId}`);
+            const images = projectImages[projectId];
+            
+            gallery.innerHTML = '';
+            
+            // Add existing images as thumbnails
+            images.forEach((imgSrc, index) => {
+                const thumb = document.createElement('img');
+                thumb.src = imgSrc;
+                thumb.className = 'gallery-thumb';
+                if (index === 0) thumb.classList.add('active');
+                thumb.onclick = () => displayMainImage(projectId, index);
+                thumb.oncontextmenu = (e) => {
+                    e.preventDefault();
+                    if (confirm('Delete this image?')) {
+                        deleteImage(projectId, index);
+                    }
+                };
+                gallery.appendChild(thumb);
+            });
+
+            // Add "+" button
+            const addBtn = document.createElement('div');
+            addBtn.className = 'add-image-btn';
+            addBtn.innerHTML = '+';
+            addBtn.onclick = () => openImageUpload(projectId);
+            gallery.appendChild(addBtn);
+        }
+
+        // Display main image
+        function displayMainImage(projectId, imageIndex) {
+            const mainImg = document.getElementById(`main-image-${projectId}`);
+            const placeholder = mainImg.previousElementSibling;
+            const images = projectImages[projectId];
+            
+            if (images.length > 0) {
+                mainImg.src = images[imageIndex];
+                mainImg.classList.add('active');
+                placeholder.classList.add('hidden');
+                
+                // Update active thumbnail
+                const gallery = document.getElementById(`gallery-${projectId}`);
+                const thumbs = gallery.querySelectorAll('.gallery-thumb');
+                thumbs.forEach((thumb, idx) => {
+                    thumb.classList.toggle('active', idx === imageIndex);
+                });
+
+                // Click to view fullscreen
+                mainImg.onclick = () => openModal(images[imageIndex]);
+            }
+        }
+
+        // Delete image
+        function deleteImage(projectId, imageIndex) {
+            projectImages[projectId].splice(imageIndex, 1);
+            saveImages(projectId);
+            updateGallery(projectId);
+            
+            // Update main image
+            if (projectImages[projectId].length > 0) {
+                displayMainImage(projectId, 0);
+            } else {
+                const mainImg = document.getElementById(`main-image-${projectId}`);
+                const placeholder = mainImg.previousElementSibling;
+                mainImg.classList.remove('active');
+                placeholder.classList.remove('hidden');
+                mainImg.onclick = null;
+            }
+        }
+
+        // Modal functions
+        function openModal(imageSrc) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            modal.classList.add('active');
+            modalImg.src = imageSrc;
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('imageModal');
+            modal.classList.remove('active');
+        }
+
+        // Close modal on escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeModal();
+        });
+
+        // Close modal on background click
+        document.getElementById('imageModal').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
